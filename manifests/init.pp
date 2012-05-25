@@ -46,7 +46,7 @@ class ircd_hybrid(
   $operator_pass = ''
 ) {
   include stdlib
-  include irc::params
+  include ircd_hybrid::params
 
   ### Begin Parameter Initilization ###
   if $network_name == '' { $REAL_network_name = $ircd_hybrid::params::ic_network_name }
