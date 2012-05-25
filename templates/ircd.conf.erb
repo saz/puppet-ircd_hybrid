@@ -773,8 +773,8 @@ modules {
     <% end -%>
 
 	/* module: the name of a module to load on startup/rehash */
-    <% modules.each do |module| -%>
-    module = "<%= module %>";
+    <% modules.each do |mod| -%>
+    module = "<%= mod %>";
     <% end -%>
 	#module = "m_tburst.so";
 };
