@@ -28,6 +28,7 @@ class ircd_hybrid::config(
   $admin_name,
   $admin_email,
   $listen_ip,
+  $listen_port,
   $auth_domains,
   $spoof_domain,
   $operator_name,
