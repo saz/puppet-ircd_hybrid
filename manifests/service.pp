@@ -15,7 +15,10 @@
 # This class file is not called directly
 class ircd_hybrid::service {
   service { $ircd_hybrid::params::ic_daemon:
-    ensure => 'running',
-    enable => 'true',
+    ensure     => 'running',
+    enable     => 'true',
+    hasstatus  => false,
+    hasrestart => true,
+    pattern    => $ircd_hybrid::params::ic_pattern,
   }
 }
