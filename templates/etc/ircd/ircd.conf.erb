@@ -1,10 +1,10 @@
 serverinfo {
-  name = "<%= ::fqdn %>";
+  name = "<%= @fqdn %>";
   description = "IRC hybrid-7 server";
   network_name = "<%= network_name %>";
   network_desc = "<%= network_desc %>";
   hub = no;
-  vhost = "<%= ::ipaddress %>";
+  vhost = "<%= @ipaddress %>";
   max_clients = 512;
 };
 
@@ -87,8 +87,8 @@ operator {
 };
 
 shared {
-  name = "<%= ::ipaddress %>";
-  user = "root@<%= ::ipaddress %>";
+  name = "<%= @ipaddress %>";
+  user = "root@<%= @ipaddress %>";
   type = kline, unkline, resv;
 };
 
