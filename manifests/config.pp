@@ -32,7 +32,8 @@ class ircd_hybrid::config(
   $spoof_domain,
   $operator_name,
   $operator_pass,
-  $module_paths
+  $module_paths,
+  $modules
 ) {
   File {
     owner => 'root',
@@ -41,6 +42,6 @@ class ircd_hybrid::config(
   }
   file { "${ircd_hybrid::params::ic_conf_dir}/ircd.conf":
     ensure  => file,
-    content => template("${module_name}/etc/ircd/ircd.conf.erb")
+    content => template("${module_name}/ircd.conf.erb")
   }
 }

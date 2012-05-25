@@ -90,6 +90,7 @@ class ircd_hybrid(
        operator_name => $REAL_operator_name,
        operator_pass => $REAL_operator_pass,
        module_paths  => $ircd_hybrid::params::ic_module_paths,
+       modules       => [ 'm_tburst.so', ],
      }
   ~> class { 'ircd_hybrid::service': }
   -> anchor { 'ircd_hybrid::end': }
