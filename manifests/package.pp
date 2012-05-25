@@ -1,4 +1,4 @@
-# Class: irc::package
+# Class: ircd_hybrid::package
 #
 # Description
 #   This class is designed to install the packages for IRC
@@ -15,8 +15,8 @@
 #
 # Sample Usage:
 #   This method should not be called directly.
-class irc::package {
-  package { $irc::params::ic_packages: 
+class ircd_hybrid::package {
+  package { $ircid_hybrid::params::ic_packages: 
     ensure => present
   }
 }

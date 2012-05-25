@@ -1,4 +1,4 @@
-# Class: irc::config
+# Class: ircd_hybrid::config
 #
 # Description
 #  This class is designed to configure the system to use IRC after packages have been deployed
@@ -22,7 +22,7 @@
 #
 # Sample Usage:
 #  This module should not be called directly.
-class irc::config(
+class ircd_hybrid::config(
   $network_name,
   $network_desc,
   $admin_name,
@@ -39,8 +39,8 @@ class irc::config(
     group => 'root',
     mode  => '0644',
   }
-  file { "${irc::params::ic_conf_dir}/ircd.conf":
+  file { "${ircd_hybrid::params::ic_conf_dir}/ircd.conf":
     ensure  => file,
-    content => template('irc/etc/ircd/ircd.conf.erb')
+    content => template("${module_name}/etc/ircd/ircd.conf.erb")
   }
 }

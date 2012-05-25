@@ -1,4 +1,4 @@
-# Class: irc::params
+# Class: ircd_hybrid::params
 #
 # Description
 #   This class is designed to carry default parameters for 
@@ -27,7 +27,7 @@
 #
 # Sample Usage:
 #   This method should not be called directly.
-class irc::params {
+class ircd_hybrid::params {
   
   # Per OS Configuration Options
   case $::operatingsystem {

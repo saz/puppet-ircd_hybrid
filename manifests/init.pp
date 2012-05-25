@@ -1,4 +1,4 @@
-# Class: irc
+# Class: ircd_hybrid
 #
 # Description
 #   This module is designed to install and manage IRC Hybrid, an IRC server
@@ -34,7 +34,7 @@
 #    operator_name => 'admin',
 #    operator_pass => 'password',
 #  }
-class irc(
+class ircd_hybrid(
   $network_name  = '',
   $network_desc  = '',
   $admin_name    = '',
@@ -49,37 +49,37 @@ class irc(
   include irc::params
 
   ### Begin Parameter Initilization ###
-  if $network_name == '' { $REAL_network_name = $irc::params::ic_network_name }
+  if $network_name == '' { $REAL_network_name = $ircd_hybrid::params::ic_network_name }
   else { $REAL_network_name = $network_name }
   
-  if $network_desc == '' { $REAL_network_desc = $irc::params::ic_network_desc }
+  if $network_desc == '' { $REAL_network_desc = $ircd_hybrid::params::ic_network_desc }
   else { $REAL_network_desc = $network_desc }
   
-  if $admin_name == '' { $REAL_admin_name = $irc::params::ic_admin_name }
+  if $admin_name == '' { $REAL_admin_name = $ircd_hybrid::params::ic_admin_name }
   else { $REAL_admin_name = $admin_name }
   
-  if $admin_email == '' { $REAL_admin_email = $irc::params::ic_admin_email }
+  if $admin_email == '' { $REAL_admin_email = $ircd_hybrid::params::ic_admin_email }
   else { $REAL_admin_email = $admin_email }
   
-  if $listen_ip == '' { $REAL_listen_ip = $irc::params::ic_listen_ip }
+  if $listen_ip == '' { $REAL_listen_ip = $ircd_hybrid::params::ic_listen_ip }
   else { $REAL_listen_ip = $listen_ip }
   
-  if $auth_domains == '' { $REAL_auth_domains = $irc::params::ic_auth_domains }
+  if $auth_domains == '' { $REAL_auth_domains = $ircd_hybrid::params::ic_auth_domains }
   else { $REAL_auth_domains = $auth_domains }
   
-  if $spoof_domain == '' { $REAL_spoof_domain = $irc::params::ic_spoof_domain }
+  if $spoof_domain == '' { $REAL_spoof_domain = $ircd_hybrid::params::ic_spoof_domain }
   else { $REAL_spoof_domain = $spoof_domain }
   
-  if $operator_name == '' { $REAL_operator_name = $irc::params::ic_operator_name }
+  if $operator_name == '' { $REAL_operator_name = $ircd_hybrid::params::ic_operator_name }
   else { $REAL_operator_name = $operator_name }
   
-  if $operator_pass == '' { $REAL_operator_pass = $irc::params::ic_operator_pass }
+  if $operator_pass == '' { $REAL_operator_pass = $ircd_hybrid::params::ic_operator_pass }
   else { $REAL_operator_pass = $operator_pass }
 
   ### Begin Flow Logic ###
-  anchor { 'irc::begin': }
-  -> class { 'irc::package': }
-  -> class { 'irc::config': 
+  anchor { 'ircd_hybrid::begin': }
+  -> class { 'ircd_hybrid::package': }
+  -> class { 'ircd_hybrid::config': 
        network_name  => $REAL_network_name,
        network_desc  => $REAL_network_desc,
        admin_name    => $REAL_admin_name,
@@ -89,8 +89,8 @@ class irc(
        spoof_domain  => $REAL_spoof_domain,
        operator_name => $REAL_operator_name,
        operator_pass => $REAL_operator_pass,
-       module_paths  => $irc::params::ic_module_paths,
+       module_paths  => $ircd_hybrid::params::ic_module_paths,
      }
-  ~> class { 'irc::service': }
-  -> anchor { 'irc::end': }
+  ~> class { 'ircd_hybrid::service': }
+  -> anchor { 'ircd_hybrid::end': }
 }

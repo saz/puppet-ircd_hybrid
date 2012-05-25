@@ -1,4 +1,4 @@
-# Class: irc::service
+# Class: ircd_hybrid::service
 #
 # This module manages irc service management
 #
@@ -13,8 +13,8 @@
 # Sample Usage:
 #
 # This class file is not called directly
-class irc::service {
-  service { $irc::params::ic_daemon:
+class ircd_hybrid::service {
+  service { $ircd_hybrid::params::ic_daemon:
     ensure => 'running',
     enable => 'true',
   }
