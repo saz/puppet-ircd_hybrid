@@ -16,7 +16,7 @@
 # Sample Usage:
 #   This method should not be called directly.
 class ircd_hybrid::package {
-  package { $ircid_hybrid::params::ic_packages: 
+  package { $ircd_hybrid::params::ic_packages: 
     ensure => present
   }
 }
