@@ -51,8 +51,10 @@ class ircd_hybrid::params {
   $ic_admin_name    = 'root'
   $ic_admin_email   = 'root@localhost'
   $ic_listen_ip     = '127.0.0.1'
+  $ic_listen_port   = 6667
   $ic_auth_domains  = ['localhost', 'localhost.localdomain']
   $ic_spoof_domain  = 'localhost.localdomain'
   $ic_operator_name = 'god'
   $ic_operator_pass = 'password123'
+  $ic_modules       = ['m_tburst.so', 'm_services']
 }

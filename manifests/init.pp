@@ -35,65 +35,39 @@
 #    operator_pass => 'password',
 #  }
 class ircd_hybrid(
-  $network_name  = '',
-  $network_desc  = '',
-  $admin_name    = '',
-  $admin_email   = '',
-  $listen_ip     = '',
-  $listen_port   = '6667',
-  $auth_domains  = '',
-  $spoof_domain  = '',
-  $operator_name = '',
-  $operator_pass = ''
-) {
+  $network_name  = $ircd_hybrid::params::ic_network_name,
+  $network_desc  = $ircd_hybrid::params::ic_network_desc,
+  $admin_name    = $ircd_hybrid::params::ic_admin_name,
+  $admin_email   = $ircd_hybrid::params::ic_admin_email,
+  $listen_ip     = $ircd_hybrid::params::ic_listen_ip,
+  $listen_port   = $ircd_hybrid::params::ic_listen_port,
+  $auth_domains  = $ircd_hybrid::params::ic_auth_domains,
+  $spoof_domain  = $ircd_hybrid::params::ic_spoof_domain,
+  $operator_name = $ircd_hybrid::params::ic_operator_name,
+  $operator_pass = $ircd_hybrid::params::ic_operator_pass,
+  $module_paths  = $ircd_hybrid::params::ic_module_paths,
+  $modules       = $ircd_hybrid::params::ic_modules
+) inherits ircd_hybrid::params {
   include stdlib
-  include ircd_hybrid::params
 
-  ### Begin Parameter Initilization ###
-  if $network_name == '' { $REAL_network_name = $ircd_hybrid::params::ic_network_name }
-  else { $REAL_network_name = $network_name }
-  
-  if $network_desc == '' { $REAL_network_desc = $ircd_hybrid::params::ic_network_desc }
-  else { $REAL_network_desc = $network_desc }
-  
-  if $admin_name == '' { $REAL_admin_name = $ircd_hybrid::params::ic_admin_name }
-  else { $REAL_admin_name = $admin_name }
-  
-  if $admin_email == '' { $REAL_admin_email = $ircd_hybrid::params::ic_admin_email }
-  else { $REAL_admin_email = $admin_email }
-  
-  if $listen_ip == '' { $REAL_listen_ip = $ircd_hybrid::params::ic_listen_ip }
-  else { $REAL_listen_ip = $listen_ip }
-  
-  if $auth_domains == '' { $REAL_auth_domains = $ircd_hybrid::params::ic_auth_domains }
-  else { $REAL_auth_domains = $auth_domains }
-  
-  if $spoof_domain == '' { $REAL_spoof_domain = $ircd_hybrid::params::ic_spoof_domain }
-  else { $REAL_spoof_domain = $spoof_domain }
-  
-  if $operator_name == '' { $REAL_operator_name = $ircd_hybrid::params::ic_operator_name }
-  else { $REAL_operator_name = $operator_name }
-  
-  if $operator_pass == '' { $REAL_operator_pass = $ircd_hybrid::params::ic_operator_pass }
-  else { $REAL_operator_pass = $operator_pass }
+  package { $ircd_hybrid::params::ic_packages: 
+    ensure => present
+  }
 
-  ### Begin Flow Logic ###
-  anchor { 'ircd_hybrid::begin': }
-  -> class { 'ircd_hybrid::package': }
-  -> class { 'ircd_hybrid::config': 
-       network_name  => $REAL_network_name,
-       network_desc  => $REAL_network_desc,
-       admin_name    => $REAL_admin_name,
-       admin_email   => $REAL_admin_email,
-       listen_ip     => $REAL_listen_ip,
-       listen_port   => $listen_port,
-       auth_domains  => $REAL_auth_domains,
-       spoof_domain  => $REAL_spoof_domain,
-       operator_name => $REAL_operator_name,
-       operator_pass => $REAL_operator_pass,
-       module_paths  => $ircd_hybrid::params::ic_module_paths,
-       modules       => [ 'm_tburst.so', ],
-     }
-  ~> class { 'ircd_hybrid::service': }
-  -> anchor { 'ircd_hybrid::end': }
+  file { "${ircd_hybrid::params::ic_conf_dir}/ircd.conf":
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/ircd.conf.erb"),
+    require => Package[$ircd_hybrid::params::ic_packages],
+  }
+
+  service { $ircd_hybrid::params::ic_daemon:
+    ensure     => 'running',
+    enable     => 'true',
+    hasstatus  => false,
+    hasrestart => true,
+    pattern    => $ircd_hybrid::params::ic_pattern,
+  }
 }
