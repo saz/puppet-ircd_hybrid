@@ -54,13 +54,15 @@ class ircd_hybrid(
     ensure => present
   }
 
-  file { "${ircd_hybrid::params::ic_conf_dir}/ircd.conf":
+  file { 'ircd.conf':
     ensure  => file,
+    path    => "${ircd_hybrid::params::ic_conf_dir}/ircd.conf",
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
     content => template("${module_name}/ircd.conf.erb"),
     require => Package[$ircd_hybrid::params::ic_packages],
+    notify  => Service[$ircd_hybrid::params::ic_daemon],
   }
 
   service { $ircd_hybrid::params::ic_daemon:
@@ -69,5 +71,6 @@ class ircd_hybrid(
     hasstatus  => false,
     hasrestart => true,
     pattern    => $ircd_hybrid::params::ic_pattern,
+    require    => File['ircd.conf'],
   }
 }

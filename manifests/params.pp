@@ -56,5 +56,5 @@ class ircd_hybrid::params {
   $ic_spoof_domain  = 'localhost.localdomain'
   $ic_operator_name = 'god'
   $ic_operator_pass = 'password123'
-  $ic_modules       = ['m_tburst.so', 'm_services']
+  $ic_modules       = ['m_tburst.so', 'm_services.so']
 }
