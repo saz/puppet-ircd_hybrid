@@ -313,15 +313,15 @@ operator {
 #	#fakename = "*.arpa";
 #};
 
-<% if @connects -%>
-<% connects.each do |connect| -%>
+<% if @connect_blocks -%>
+<% connect_blocks.each do |connect_block| -%>
 connect {
-    name = "<%= connect['name'] %>";
-    host = "<%= connect['host'] %>";
-    send_password = "<%= connect['send_password'] %>";
-    accept_password = "<%= connect['accept_password'] %>";
-    hub_mask = "*";
-    class = "server";
+    name = "<%= connect_block['name'] %>";
+    host = "<%= connect_block['host'] %>";
+    send_password = "<%= connect_block['send_password'] %>";
+    accept_password = "<%= connect_block['accept_password'] %>";
+    hub_mask = "<%= connect_block['hub_mask'] %>";
+    class = "<%= connect_block['class'] %>";
 };
 <% end -%>
 <% end -%>

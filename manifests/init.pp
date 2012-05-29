@@ -47,7 +47,7 @@ class ircd_hybrid(
   $operator_pass = $ircd_hybrid::params::ic_operator_pass,
   $module_paths  = $ircd_hybrid::params::ic_module_paths,
   $modules       = $ircd_hybrid::params::ic_modules,
-  $connects      = undef
+  $connect_blocks = undef
 ) inherits ircd_hybrid::params {
   include stdlib
 
