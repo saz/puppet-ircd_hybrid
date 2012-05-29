@@ -224,7 +224,6 @@ operator {
 	 * MD5 is supported. If you want to use it, use mkpasswd -Hmd5.
 	 */
 	password = "<%= operator_pass %>";
-	#password = "$1$9PTzrFkW$yh3ablZ5DnHeU9yjhj..U/";
 
 	/* class: the class the oper joins when they successfully /oper */
 	class = "opers";
@@ -766,8 +765,6 @@ modules {
 	/* module path: paths to search for modules specified below and 
 	 * in /modload.
 	 */
-	#path = "/usr/lib/ircd-hybrid/modules";
-	#path = "/usr/lib/ircd-hybrid/modules/autoload";
     <% module_paths.each do |path| -%>
     path = "<%= path %>";
     <% end -%>
@@ -776,5 +773,4 @@ modules {
     <% modules.each do |mod| -%>
     module = "<%= mod %>";
     <% end -%>
-	#module = "m_tburst.so";
 };
