@@ -316,10 +316,10 @@ operator {
 <% if @connects -%>
 <% connects.each do |connect| -%>
 connect {
-    name = "<% connect['name'] %>";
-    host = "<% connect['host'] %>";
-    send_password = "<% connect['send_password'] %>";
-    accept_password = "<% connect['accept_password'] %>";
+    name = "<%= connect['name'] %>";
+    host = "<%= connect['host'] %>";
+    send_password = "<%= connect['send_password'] %>";
+    accept_password = "<%= connect['accept_password'] %>";
     hub_mask = "*";
     class = "server";
 };
