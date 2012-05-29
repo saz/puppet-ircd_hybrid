@@ -210,9 +210,9 @@ operator {
 	/* user: the user@host required for this operator.  CIDR is not
 	 * supported.  multiple user="" lines are supported.
 	 */
-	user = "<%= operator_name %>@127.0.0.1";
+    user = "<%= operator_name %>@127.0.0.1";
     <% auth_domains.each do |dom| -%>
-    user = "<%= dom %>";
+    user = "*@<%= dom %>";
     <% end -%>
 
 	/* password: the password required to oper.  By default this will
