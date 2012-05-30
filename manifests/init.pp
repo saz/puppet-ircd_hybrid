@@ -42,7 +42,7 @@ class ircd_hybrid(
   $listen_ip     = $ircd_hybrid::params::ic_listen_ip,
   $listen_port   = $ircd_hybrid::params::ic_listen_port,
   $auth_domains  = $ircd_hybrid::params::ic_auth_domains,
-  $spoof_domain  = $ircd_hybrid::params::ic_spoof_domain,
+  $spoof_domain  = undef,
   $operator_name = $ircd_hybrid::params::ic_operator_name,
   $operator_pass = $ircd_hybrid::params::ic_operator_pass,
   $module_paths  = $ircd_hybrid::params::ic_module_paths,

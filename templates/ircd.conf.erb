@@ -153,7 +153,11 @@ auth {
 	/* spoof: fake the users host to be be this.  This is free-form,
 	 * just do everyone a favour and dont abuse it. (OLD I: = flag)
 	 */
-	spoof = "<%= spoof_domain %>";
+    <% if @spoof_domain -%>
+    spoof = "<%= spoof_domain %>";
+    <% else -%>
+    #spoof = "localhost.localdomain";
+    <% end - %>
 
 	/* spoof notice: enable spoofing notification to admins (default yes) */
 	spoof_notice = yes;
